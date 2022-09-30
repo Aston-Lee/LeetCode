@@ -10,12 +10,23 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        nodedict = {}
-        while(head):
-            if head not in nodedict.keys():
-                nodedict[head] = 1
-            else:
-                return head
-            head = head.next
-        return None
+        ## dict solution
+        # nodedict = {}
+        # while(head):
+        #     if head not in nodedict.keys():
+        #         nodedict[head] = 1
+        #     else:
+        #         return head
+        #     head = head.next
+        # return None
         
+        ## set solution
+        visited = set()
+        
+        while(head):
+            if head in visited:
+                return head
+            else:
+                visited.add(head)
+                head = head.next
+        return None
