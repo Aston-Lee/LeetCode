@@ -44,7 +44,7 @@ class Solution(object):
                         gdict[guess[i]] = 1
                     else:
                         gdict[guess[i]] += 1
-                
+                    
 #                 print("secret[i]", int(secret[i]), "sdict: ",sdict)
 #                 print("guess[i] ", int(guess[i]), "gdict: ",gdict)
 #                 print("--------")
