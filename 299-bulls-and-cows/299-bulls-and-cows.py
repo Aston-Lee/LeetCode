@@ -25,17 +25,11 @@ class Solution(object):
             if secret[i] == guess[i]:
                 A += 1
             else:
-                if secret[i] in gdict.keys() :
-                    if gdict[secret[i]] > 0:
-                        gdict[secret[i]] -= 1
-                        B += 1
-                    elif gdict[secret[i]] == 0:
-                        if secret[i] not in sdict.keys():
-                            sdict[secret[i]] = 1
-                        else:
-                            sdict[secret[i]] += 1
+                if secret[i] in gdict.keys() and gdict[secret[i]] > 0 :
+                    gdict[secret[i]] -= 1
+                    B += 1
                         
-                elif secret[i] not in gdict.keys() :
+                elif secret[i] not in gdict.keys() or gdict[secret[i]] == 0 :
                     if secret[i] not in sdict.keys():
                         sdict[secret[i]] = 1
                     else:
