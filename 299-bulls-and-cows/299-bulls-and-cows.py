@@ -39,15 +39,15 @@ class Solution(object):
                     sdict[guess[i]] -= 1
                     B += 1
 
-                elif (guess[i] not in sdict.keys() or sdict[guess[i]] == 0):
+                elif guess[i] not in sdict.keys() or sdict[guess[i]] == 0:
                     if guess[i] not in gdict.keys():
                         gdict[guess[i]] = 1
                     else:
                         gdict[guess[i]] += 1
                 
-                print("secret[i]", int(secret[i]), "sdict: ",sdict)
-                print("guess[i] ", int(guess[i]), "gdict: ",gdict)
-                print("--------")
+#                 print("secret[i]", int(secret[i]), "sdict: ",sdict)
+#                 print("guess[i] ", int(guess[i]), "gdict: ",gdict)
+#                 print("--------")
 
             
         return str(A)+'A'+str(B)+'B'
