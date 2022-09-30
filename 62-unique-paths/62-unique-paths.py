@@ -9,7 +9,7 @@ class Solution(object):
         mem = [[False]*n]*m
         mem[0][0] = 0
         
-        ## top down: maximum recursion and its not dp (no mem)
+        ## top down will encountered maximum recursion error and its not dp (no mem)
         for i in range(m):
             for j in range(n):
                 if i==0 or j==0:
