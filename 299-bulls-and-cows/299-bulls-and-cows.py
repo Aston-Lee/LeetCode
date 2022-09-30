@@ -35,7 +35,7 @@ class Solution(object):
                         else:
                             sdict[secret[i]] += 1
                         
-                elif secret[i] not in gdict.keys():
+                elif secret[i] not in gdict.keys() :
                     if secret[i] not in sdict.keys():
                         sdict[secret[i]] = 1
                     else:
@@ -45,7 +45,7 @@ class Solution(object):
                     sdict[guess[i]] -= 1
                     B += 1
 
-                elif (guess[i] not in sdict.keys()) or (guess[i] in sdict.keys() and sdict[guess[i]] == 0):
+                elif (guess[i] not in sdict.keys() or sdict[guess[i]] == 0):
                     if guess[i] not in gdict.keys():
                         gdict[guess[i]] = 1
                     else:
