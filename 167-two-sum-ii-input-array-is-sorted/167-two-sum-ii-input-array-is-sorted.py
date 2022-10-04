@@ -8,7 +8,7 @@ class Solution(object):
         record = {}
         for i, n in enumerate(numbers):
             if n in record.keys():
-                return[record[n]+1, i+1]
+                return[record[n], i+1]
             else:
-                record[target - n] = i
+                record[target - n] = i+1
         
