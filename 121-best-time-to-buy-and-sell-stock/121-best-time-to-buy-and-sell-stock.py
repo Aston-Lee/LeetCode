@@ -22,7 +22,7 @@ class Solution(object):
                     
 #         return maxvalue
 
-        # @2 pointer
+        # @2 pointer Time:O(n) Space:O(1)
         l, r = 0, 1
         maxP = 0
         while r<len(prices):
