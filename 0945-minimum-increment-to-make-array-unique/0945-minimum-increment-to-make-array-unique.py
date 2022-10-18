@@ -16,7 +16,7 @@ class Solution(object):
             elif taken and count[x] == 0:
                 n = taken.pop()
                 # n = taken.popleft()
-                print(n)
+                # print(n)
                 moves += x-n
         
         return moves
