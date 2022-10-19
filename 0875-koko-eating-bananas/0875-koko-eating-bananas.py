@@ -14,7 +14,6 @@ class Solution(object):
             if curr_h > h:
                 l = mid + 1
             else:
-                
                 lowest = min(lowest, mid)
                 r = mid - 1
                 
