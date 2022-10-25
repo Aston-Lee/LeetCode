@@ -1,6 +1,6 @@
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        l, r = 0, 0
+        r = 0
         counter = 0
         maximum = -float('inf')
         while(r!=len(nums)):
