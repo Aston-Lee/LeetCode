@@ -4,7 +4,7 @@ class Solution:
         stones = [-s for s in stones]
         heapq.heapify(stones)
 
-        while( len(stones)>=2 ):
+        while( len(stones)>1 ):
             n1 = heapq.heappop(stones)
             n2 = heapq.heappop(stones)
             if n1!=n2:
