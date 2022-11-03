@@ -13,8 +13,6 @@ class Solution:
             if l == r and nums[l] == 0:
                 return False
             l += 1
-                
-        return False
         
         
         
