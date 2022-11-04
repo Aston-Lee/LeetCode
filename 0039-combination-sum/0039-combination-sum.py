@@ -4,7 +4,7 @@ class Solution:
         res = []
         def backtrack(arr, val):
             if val == target:
-                if  sorted(arr) not in res:
+                if sorted(arr) not in res:
                     res.append(sorted(list(arr)))
                 return
             if val > target:
