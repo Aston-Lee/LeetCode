@@ -37,10 +37,10 @@ class Solution:
             return head.next 
         
         def mergersort(lists):
-            # amount = 
+            amount = len(lists)
             interval = 1
-            while( interval< len(lists) ):
-                for i in range(0, len(lists)-interval, interval*2):
+            while( interval< amount ):
+                for i in range(0, amount-interval, interval*2):
                     lists[i] = mergelist(lists[i], lists[i+interval])
                 interval *= 2
                 
