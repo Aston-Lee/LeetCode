@@ -10,21 +10,22 @@ class Solution:
         if root == None:
             return []
         
-        mydict = collections.defaultdict(list)
+        # mydict = collections.defaultdict(list)
         lst = []
         
         def traverse(node, depth):
             if node == None:
                 return
             
-            mydict[depth].append(node.val)
+            # mydict[depth].append(node.val)
+            if depth+1 > len(lst):
+                lst.append([])
+            lst[depth].append(node.val)
             
             traverse(node.left, depth+1)
             traverse(node.right, depth+1)
             return 
         
         traverse( root , 0 )
-        for k in mydict:
-            lst.append(mydict[k][:])
         return lst
             
