@@ -5,9 +5,10 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    
     counter = 0
+    
     def goodNodes(self, root: TreeNode) -> int:
-        
         
         def traverse(node, maxValue):
             
