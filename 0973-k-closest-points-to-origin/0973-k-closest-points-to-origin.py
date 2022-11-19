@@ -1,23 +1,22 @@
-
-class Solution(object):
-    def kClosest(self, points, k):
-        """
-        :type points: List[List[int]]
-        :type k: int
-        :rtype: List[List[int]]
-        """
-        MinHeap = []
-        for x, y in points:
-            dist = (x**2) + (y**2)
-            MinHeap.append([dist, x, y])
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
         
-        heapq.heapify(MinHeap)
+        ## minheap: heapq.heapify
+        minheap = []
         
+        for point in points:
+            length = point[0]**2 + point[1]**2
+            minheap.append((length, (point)))
+            
+        heapq.heapify(minheap)
         res = []
-        while k>0:
-            d, x, y = heapq.heappop(MinHeap)
-            res.append([x,y])
-            k-=1
+        for i in range(k):
+            res.append(heapq.heappop(minheap)[1])
         
         return res
+        
+        
+        
+        ## followup: try the pushpop, maintaining k size array 
+        
         
