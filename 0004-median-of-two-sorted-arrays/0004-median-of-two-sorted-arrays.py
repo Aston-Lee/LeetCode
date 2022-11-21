@@ -28,7 +28,7 @@ class Solution:
         if nums2 == []:
             return nums1[0]
             
-        ## while(maxheap max is bigger than minheap min, wap both element)
+        ## while(maxheap max is bigger than minheap min, swap both element)
         while(nums1[0] < -nums2[0]):
             small = heapq.heappop(nums1)
             big = heapq.heappop(nums2)
