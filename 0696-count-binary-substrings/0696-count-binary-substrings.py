@@ -10,9 +10,7 @@ class Solution:
             else:
                 tmp+=1
         group.append(tmp)
-                
-        print(group)
-                
+        
         res = 0     
         for i in range(1, len(group)):
             res += min(group[i-1], group[i])
