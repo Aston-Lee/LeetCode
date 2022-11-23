@@ -1,6 +1,7 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         ## use copy.deepcopy for deepcopy
+        ## in order to fit the time complexity, 
         
         neighbor = ((0,1), (1,0), (0,-1), (-1,0))
         
@@ -35,6 +36,7 @@ class Solution:
             if k not in boardDict or wordDict[k] > boardDict[k]:
                 return False
             
+        ## this is so crucial
         if boardDict[word[0]] > boardDict[word[-1]]:
             word = word[::-1]
         
