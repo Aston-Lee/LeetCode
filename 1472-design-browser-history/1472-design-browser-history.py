@@ -17,7 +17,7 @@ class BrowserHistory:
             self.queue[self.pointer] = url
         
         self.maxpointer = self.pointer
-        print(self.pointer, self.maxpointer)
+        # print(self.pointer, self.maxpointer)
         # return self.queue[self.pointer]
         return url
         
@@ -26,7 +26,7 @@ class BrowserHistory:
         self.pointer -= steps
         if self.pointer < 0:
             self.pointer = 0
-        print("back", steps, "to", self.pointer, "curr max:", self.maxpointer)
+        # print("back", steps, "to", self.pointer, "curr max:", self.maxpointer)
         return self.queue[self.pointer]
         
 
@@ -34,7 +34,7 @@ class BrowserHistory:
         self.pointer += steps
         if self.pointer > self.maxpointer:
             self.pointer = self.maxpointer
-        print("forward", steps, "to", self.pointer,"curr max", self.maxpointer)
+        # print("forward", steps, "to", self.pointer,"curr max", self.maxpointer)
         return self.queue[self.pointer]
     
 
