@@ -36,7 +36,6 @@ class Solution:
         for n1, n2 in edges:
             if not union(n1, n2):
                 return False
-        print(rank)
         if max(rank) == n:
             return True
         else:
