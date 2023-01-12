@@ -7,7 +7,6 @@ class Solution:
         for crs, pre in prerequisites:
             preMap[crs].append(pre)
         
-        # print(preMap)
             
         def dfs(crsNum, seen) -> bool:
             if preMap[crsNum] == []:
@@ -23,7 +22,7 @@ class Solution:
                     if not dfs(preNum, seen):
                         return False
                     seen.remove(crsNum)
-                    preMap[crsNum] = []
+                    preMap[crsNum] = [] ## why is this
             return True
         
         for i in range(numCourses):
