@@ -22,7 +22,7 @@ class Solution:
                     if not dfs(preNum, seen):
                         return False
                     seen.remove(crsNum)
-                    preMap[crsNum] = [] ## why is this
+            preMap[crsNum] = [] ## why is this
             return True
         
         for i in range(numCourses):
