@@ -4,11 +4,13 @@ class TrieNode:
         self.isEnd = False
 
 class WordDictionary:
-
     def __init__(self):
         self.root = TrieNode()
 
     def addWord(self, word: str) -> None:
+        """
+        Add the word to the Trie
+        """
         cur = self.root
         for c in word:
             if c not in cur.children:
@@ -17,26 +19,30 @@ class WordDictionary:
         cur.isEnd = True 
 
     def search(self, word: str) -> bool:
-        
-        ## try using dfs to go down and search, dfs make sense
-        def dfs(j, node):
-            cur = node
-            for i in range(j, len(word)):
-                c = word[i]
-                if c == '.':
-                    for childnode in cur.children.values():
-                        if dfs(i+1, childnode) == True:
-                            return True
-                    return False                        
+        """
+        Search the Trie for a word, using a DFS.
+        """
+        def dfs(i: int, node: TrieNode) -> bool:
+            """
+            A helper function that uses DFS to search the Trie.
+            """
+            if i == len(word):
+                return node.isEnd
+            
+            c = word[i]
+            if c == '.':
+                for child_node in node.children.values():
+                    if dfs(i+1, child_node) == True:
+                        return True
+                return False
+            else:
+                if c in node.children:
+                    return dfs(i+1, node.children[c])
                 else:
-                    if c in cur.children:
-                        cur = cur.children[c]
-                    else: 
-                        return False
-            return cur.isEnd
-                    
-                    
+                    return False
+                
         return dfs(0, self.root)
+
 
 
 # Your WordDictionary object will be instantiated and called as such:
