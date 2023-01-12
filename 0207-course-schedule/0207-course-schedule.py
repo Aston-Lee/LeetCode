@@ -1,34 +1,31 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        
-        ## union-find is not the case for this
-        ## use adjency list by dfs with crs, prereq is much easier
+        # Create the prerequisites map 
         preMap = defaultdict(list)
         for crs, pre in prerequisites:
             preMap[crs].append(pre)
         
-            
         def dfs(crsNum, seen) -> bool:
+            # If there are no more prerequisites, return True
             if preMap[crsNum] == []:
                 return True
+            # If the course has already been seen, there is a cycle so return False
             if crsNum in seen:
                 return False
+            seen.add(crsNum)
+            # Check the prerequisites of the current course
             for preNum in preMap[crsNum]:
-                original_seen = seen
-                if preNum in seen:
+                if not dfs(preNum, seen):
                     return False
-                else:
-                    seen.add(crsNum)
-                    if not dfs(preNum, seen):
-                        return False
-                    seen.remove(crsNum)
-            preMap[crsNum] = [] ## why is this
+            # Once all the prerequisites have been visited, remove the course from the seen set
+            seen.remove(crsNum)
+            # Mark the current course as finished traversing
+            preMap[crsNum] = []
             return True
         
+        # Check each course
         for i in range(numCourses):
             seen = set()
             if not dfs(i, seen):
                 return False
         return True
-
-
