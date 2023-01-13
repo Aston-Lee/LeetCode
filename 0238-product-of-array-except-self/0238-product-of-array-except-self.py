@@ -18,8 +18,6 @@ class Solution:
         postfix.append(1)
         postfix = postfix[::-1]
         
-        print(prefix, postfix)
-        
         output = []
         for i in range(n):
             if i == 0:
