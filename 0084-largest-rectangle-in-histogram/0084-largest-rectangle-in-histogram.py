@@ -6,7 +6,7 @@ class Solution:
             if not stack or height >= stack[-1][1]:
                 stack.append([index, height])
             else:
-                start, tmpheight = index, height ##not sure 
+                # start, tmpheight = index, height ##not sure 
                 while stack and stack[-1][1] > height:
                     start, tmpheight = stack.pop()
                     MaxArea = max(MaxArea, (index-start)*tmpheight)
