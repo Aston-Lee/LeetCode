@@ -4,9 +4,8 @@ class Solution:
         Res = []
         def backtrack(candidates, target, tmpRes, start ):
             if target == 0:
-                # tmpRes = sorted(tmpRes)
-                # if tmpRes[:] not in Res:
-                Res.append(tmpRes[:])
+                # The [:] slice notation is used to create a new list that is a copy of the original list, which can be modified without affecting the original list.
+                Res.append(tmpRes[:]) 
             
             if target <= 0:
                 return 
