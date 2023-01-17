@@ -1,6 +1,6 @@
 class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
-        
+        ## use copy.deepcopy 
         def backtrack(comb, remain, curr, counter, results):
             if remain == 0 :
                 #  make a deep copy of the current combination
