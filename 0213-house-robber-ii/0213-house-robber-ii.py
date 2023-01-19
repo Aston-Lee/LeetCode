@@ -1,5 +1,8 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
+        # cant robe geginning and the last
+        # so seperate two proportion and do regular dp
+        
         
         def dp(nums):
             mem = [False] * len(nums)
