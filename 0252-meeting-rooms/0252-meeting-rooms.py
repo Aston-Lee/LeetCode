@@ -15,16 +15,16 @@ class Solution:
 #                     booked[i] = True
 #         return True
         
+        if len(intervals) <= 1:
+            return True
         
         sorted_intervals = sorted(intervals)
-        currMaxEnd = 0
-        for start, end in sorted_intervals:
-            if start < currMaxEnd:
+        for i in range(1, len(sorted_intervals)):
+            if sorted_intervals[i][0] < sorted_intervals[i-1][1]:
                 return False
-            currMaxEnd = max(currMaxEnd, end)
         return True
     
-    
+        
             
     
     
