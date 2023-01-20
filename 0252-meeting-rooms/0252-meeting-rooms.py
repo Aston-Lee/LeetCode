@@ -14,7 +14,8 @@ class Solution:
 #                 else:
 #                     booked[i] = True
 #         return True
-
+        
+        
         sorted_intervals = sorted(intervals)
         currMaxEnd = 0
         for start, end in sorted_intervals:
@@ -22,6 +23,8 @@ class Solution:
                 return False
             currMaxEnd = max(currMaxEnd, end)
         return True
+    
+    
             
     
     
