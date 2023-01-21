@@ -16,9 +16,10 @@ class Solution:
         q.append((0, 0))
         di, dj = 0,1
         output = []
+        endcondition = m*n
         
         while q:
-            if len(output) == m*n:
+            if len(output) == endcondition:
                 break
             i, j = q.popleft()
             seen.add((i,j))
