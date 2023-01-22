@@ -1,29 +1,28 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        # dfs
-        preMap = {i: [] for i in range(numCourses)}
-
-        # map each course to : prereq list
+        
+        preMap = defaultdict(list)
         for crs, pre in prerequisites:
             preMap[crs].append(pre)
-
-        visiting = set()
-
+            
+        cycle = set() #record every loop, if there's a cycle
+        visit = set()
+        
         def dfs(crs):
-            if crs in visiting:
-                return False
-            if preMap[crs] == []:
+            if crs in visit:
                 return True
-
-            visiting.add(crs)
+            if crs in cycle:
+                return False
+            
+            cycle.add(crs)
             for pre in preMap[crs]:
-                if not dfs(pre):
+                if dfs(pre) == False:
                     return False
-            visiting.remove(crs)
-            preMap[crs] = []
+            cycle.remove(crs)
+            visit.add(crs)
             return True
-
-        for c in range(numCourses):
-            if not dfs(c):
+            
+        for i in range(numCourses):
+            if dfs(i) == False:
                 return False
         return True
