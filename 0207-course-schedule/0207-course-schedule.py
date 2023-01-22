@@ -1,18 +1,29 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        graph = [[] for _ in range(numCourses)]
-        indegree = [0] * numCourses
-        for x, y in prerequisites:
-            graph[y].append(x)
-            indegree[x] += 1
+        # dfs
+        preMap = {i: [] for i in range(numCourses)}
 
-        queue = [i for i in range(numCourses) if indegree[i] == 0]
-        cnt = 0
-        while queue:
-            cnt += 1
-            node = queue.pop(0)
-            for neighbor in graph[node]:
-                indegree[neighbor] -= 1
-                if indegree[neighbor] == 0:
-                    queue.append(neighbor)
-        return cnt == numCourses
+        # map each course to : prereq list
+        for crs, pre in prerequisites:
+            preMap[crs].append(pre)
+
+        visiting = set()
+
+        def dfs(crs):
+            if crs in visiting:
+                return False
+            if preMap[crs] == []:
+                return True
+
+            visiting.add(crs)
+            for pre in preMap[crs]:
+                if not dfs(pre):
+                    return False
+            visiting.remove(crs)
+            preMap[crs] = []
+            return True
+
+        for c in range(numCourses):
+            if not dfs(c):
+                return False
+        return True
