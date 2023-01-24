@@ -28,15 +28,18 @@ class Solution:
         if nums2 == []:
             return nums1[0]
             
-        ## while(maxheap max is bigger than minheap min, wap both element)
+        ## while(maxheap max is bigger than minheap min, swap both element)
         while(nums1[0] < -nums2[0]):
-            small = heapq.heappop(nums1)
-            big = heapq.heappop(nums2)
+#             small = heapq.heappop(nums1)
+#             big = heapq.heappop(nums2)
             
-            heapq.heappush(nums1, -big)
-            heapq.heappush(nums2, -small)
+#             heapq.heappush(nums1, -big)
+#             heapq.heappush(nums2, -small)
             
-        # print(nums1, nums2)
+            heapq.heappush(nums1, -heapq.heappop(nums2))
+            heapq.heappush(nums2, -heapq.heappop(nums1))
+            
+
         if len(nums1) > len(nums2):
             return nums1[0]
         else:
