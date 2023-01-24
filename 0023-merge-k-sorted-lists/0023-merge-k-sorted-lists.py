@@ -5,17 +5,11 @@
 #         self.next = next
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        # possible solution: minheap, 
+        # possible solution: minheap, merge sort
         # use heap but everytime I store the value and address onto heap
-        
-#         merge sort 
-        
-#         merge like 1 and 2 
-        
-#         create new list 4 the merge wiht 3
-        
-#         complexity:
-            
+
+#         @mergesort, Time:O(Nlogk), Space:O(1)
+
 #         total N nodes 
 #         devided to k lists 
 #         listsize of N/k
@@ -39,7 +33,7 @@ class Solution:
         def mergersort(lists):
             amount = len(lists)
             interval = 1
-            while( interval< amount ):
+            while( interval < amount ):
                 for i in range(0, amount-interval, interval*2):
                     lists[i] = mergelist(lists[i], lists[i+interval])
                 interval *= 2
