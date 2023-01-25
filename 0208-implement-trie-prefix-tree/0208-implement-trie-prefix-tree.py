@@ -1,6 +1,5 @@
 class TrieNode:
-    def __init__(self, char = ""):
-        self.char = char
+    def __init__(self):
         self.children = {} ## initialize dict to store the child right below
         self.is_end = False
 
@@ -17,7 +16,7 @@ class Trie:
             if char in node.children:
                 node = node.children[char]
             else:
-                new_node = TrieNode(char)
+                new_node = TrieNode()
                 node.children[char] = new_node
                 node = new_node
         node.is_end = True ## normaly this is False, only set to True when loop throu all char
