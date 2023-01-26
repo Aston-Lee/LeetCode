@@ -13,30 +13,29 @@ class Solution(object):
                     for z in range(3):
                         if board[3*i+k][3*j+z] != '.': 
                             if board[3*i+k][3*j+z] in seen:
-                                print(i,k, j,z, 3*i+k, 3*j+z, board[3*i+k][3*j+z])
                                 return False
                             else:
                                 seen.add(board[3*i+k][3*j+z])
                       
         # check row
         for i in range(N):
-            box = [0]*N
+            seen = set()
             for j in range(N):
                 if board[i][j] != '.':
-                    if (box[int(board[i][j])-1]) == 1:
+                    if board[i][j] in seen:
                         return False
                     else:
-                        box[int(board[i][j])-1] = 1
+                        seen.add(board[i][j])
         
         #check column
         for j in range(N):
-            box = [0]*N
+            seen = set()
             for i in range(N):
                 if board[i][j] != '.':
-                    if (box[int(board[i][j])-1]) == 1:
+                    if board[i][j] in seen:
                         return False
                     else:
-                        box[int(board[i][j])-1] = 1
+                        seen.add(board[i][j])
         
         return True
         
