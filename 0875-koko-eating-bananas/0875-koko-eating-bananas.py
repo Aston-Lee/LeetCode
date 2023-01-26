@@ -8,8 +8,9 @@ class Solution:
         while l<=r:
             amount = (l+r)//2
             currh = 0
-            for p in piles:
-                currh += math.ceil(p/amount)
+            # for p in piles:
+            #     currh += math.ceil(p/amount)
+            currh = sum([math.ceil(p/amount) for p in piles])
             
             if currh > h:
                 l = amount+1
