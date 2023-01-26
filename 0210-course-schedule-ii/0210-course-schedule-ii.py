@@ -1,18 +1,12 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         
-        
-#         1. build a adjency list
-        
-#         2. dfs() 
-        
-        
         in_degree = defaultdict(int)
-        graph = defaultdict(list)
+        preMap = defaultdict(list)
         
         for crs, pre in prerequisites:
             in_degree[pre] += 1
-            graph[crs].append(pre)
+            preMap[crs].append(pre)
             
         start_nodes = deque()
         for i in range(numCourses):
@@ -23,7 +17,7 @@ class Solution:
         while start_nodes:
             crs = start_nodes.popleft()
             sorted_order.append(crs)
-            for pre in graph[crs]:
+            for pre in preMap[crs]:
                 in_degree[pre] -= 1
                 if in_degree[pre] == 0:
                     start_nodes.append(pre)
