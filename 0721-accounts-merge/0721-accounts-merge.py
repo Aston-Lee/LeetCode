@@ -8,7 +8,7 @@ class Solution:
                 email = account[j]
                 emailMap[email].append(i)
                 
-        ## DFS traverse account
+        ## DFS function traverse account
         visitedAccounts = [False] * len(accounts)
         def dfs(i, emails):
             if visitedAccounts[i]:
@@ -22,10 +22,10 @@ class Solution:
         
         ## Main
         res = []
-        for i, account in enumerate(accounts):
+        for i, (name, *account) in enumerate(accounts):
             if visitedAccounts[i]:
                 continue
-            name, emails = account[0], set()
+            emails = set()
             dfs(i, emails)
             res.append([name] + sorted(emails))
         return res
