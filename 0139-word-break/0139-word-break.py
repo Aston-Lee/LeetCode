@@ -9,7 +9,7 @@ class Solution:
             for j in range(i):
                 if dp[j] and s[j:i] in wordSet:
                     dp[i] = True
-                    break
+                    # break
         
         return dp[len(s)]
                     
