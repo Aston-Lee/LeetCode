@@ -4,8 +4,6 @@ class Solution:
         output = []
         nums.sort()
         
-        [1,1,1]
-        
         for i in range(len(nums)-2):
             if i>0 and nums[i] == nums[i-1]:
                 continue
