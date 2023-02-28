@@ -1,34 +1,35 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         
-        res = [0 ,0]
-        globallen = 0
-        for i in range(len(s)):
-            locallen = 0
-            ## odd, eg "bab"
-            l, r = i, i
-            while 0 <= l and r < len(s):
-                if s[l] == s[r]:
-                    locallen = r - l + 1
-                    if locallen > globallen:
-                        globallen = locallen
-                        res = [l, r]
-                else:
-                    break
-                l -= 1
-                r += 1
-                
-            ## even
-            l, r = i, i+1
-            while 0 <= l and r < len(s):
-                if s[l] == s[r]:
-                    locallen = r - l + 1
-                    if locallen > globallen:
-                        globallen = locallen
-                        res = [l, r]
-                else:
-                    break
-                l -= 1
-                r += 1
+        # center, diameter
+        ## check the updating logic
         
-        return s[res[0]:res[1]+1]
+        if len(s) == 1:
+            return s
+        
+        res = s[0]
+        
+        for i in range(len(s)):
+            diameter = 0
+            while i - diameter != -1 and i + diameter != len(s):
+                if s[i - diameter] == s[i + diameter]:
+                    diameter += 1
+                else:
+                    break
+            if 2*diameter - 1 > len(res):
+                res = s[i - diameter + 1 : i + diameter]
+            
+        for i in range(len(s)-1):
+            diameter = 0
+            if s[i] == s[i+1]:
+                while i - diameter != -1 and i+1 + diameter != len(s):
+                    if s[i - diameter] == s[i+1 + diameter]:
+                        diameter += 1
+                    else:
+                        break
+                if 2*diameter > len(res):
+                    res = s[i - diameter + 1 : i+1 + diameter]
+                    
+        return res
+        
+        
