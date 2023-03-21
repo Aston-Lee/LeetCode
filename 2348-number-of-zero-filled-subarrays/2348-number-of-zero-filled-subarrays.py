@@ -27,7 +27,6 @@ class Solution:
             if nums[i] == 0:
                 currLen += 1
             else:
-                print(i, currLen)
                 if currLen != 0:
                     for p in range(currLen+1):
                         res += p 
