@@ -5,7 +5,7 @@ class Solution:
             adjList[u].add((v, True))
             adjList[v].add((u, False))
         
-        print(adjList)
+        # print(adjList)
         
         queue = deque([0])
         visited = set([0])
