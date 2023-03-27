@@ -28,14 +28,10 @@ class Solution:
         componentSize = {}
         for i in range(n):
             componentSize[find(i)] = componentSize.get(find(i), 0) + 1
-            
-        print(parent)
-        print(rank)
         
         numberOfPaths = 0
-        remainingNodes = n
         for component in componentSize.values():
-            numberOfPaths += component * (remainingNodes - component)
-            remainingNodes -= component
+            numberOfPaths += component * (n - component)
+            n -= component
         
         return numberOfPaths
