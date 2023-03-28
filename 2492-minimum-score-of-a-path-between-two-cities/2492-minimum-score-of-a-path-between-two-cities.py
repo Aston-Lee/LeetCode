@@ -13,15 +13,15 @@ class Solution:
         return answer
         
         
-    def dfs(self, node: int, adj: List[List[Tuple[int, int]]], visit: List[bool], answer: int) -> None:
+    def dfs(self, node: int, adj: List[List[Tuple[int, int]]], visit: List[bool], ans: int) -> None:
         
         visit[node] = True
         for edge in adj[node]:
-            answer = min(answer, edge[1])
+            ans = min(ans, edge[1])
             if not visit[edge[0]]:
-                answer = self.dfs(edge[0], adj, visit, answer)
+                ans = self.dfs(edge[0], adj, visit, ans)
 
-        return answer
+        return ans
     
 
         
