@@ -8,19 +8,20 @@ class Solution:
         print(adj)
 
         visit = [False] * (n + 1)
-        answer = [float(inf)]
-        self.dfs(1, adj, visit, answer)
-        return answer[0]
+        answer = float(inf)
+        answer = self.dfs(1, adj, visit, answer)
+        return answer
         
         
-    def dfs(self, node: int, adj: List[List[Tuple[int, int]]], visit: List[bool], answer: List[int]) -> None:
+    def dfs(self, node: int, adj: List[List[Tuple[int, int]]], visit: List[bool], answer: int) -> None:
         
         visit[node] = True
         for edge in adj[node]:
-            answer[0] = min(answer[0], edge[1])
+            answer = min(answer, edge[1])
             if not visit[edge[0]]:
-                self.dfs(edge[0], adj, visit, answer)
+                answer = self.dfs(edge[0], adj, visit, answer)
 
+        return answer
     
 
         
