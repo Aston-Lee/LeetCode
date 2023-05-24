@@ -1,12 +1,15 @@
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
         
-        ## brute force 
-        # for i in range(len(nums)-1):
-        #     for j in range(i+1, len(nums)):
-        #         if nums[i] == nums[j]:
-        #             return nums[i]
+        firstSet = set()     
+        secondSet = set()
         
-        while nums[0] != nums[nums[0]]:
-            nums[nums[0]], nums[0] = nums[0], nums[nums[0]]
-        return nums[0]
+        for n in nums:
+            if n not in firstSet:
+                firstSet.add(n)
+            elif n in firstSet:
+                secondSet.add(n)
+                
+        return list(secondSet).pop()
+        
+        
