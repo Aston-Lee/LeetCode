@@ -8,8 +8,8 @@ class Solution:
             if n not in firstSet:
                 firstSet.add(n)
             elif n in firstSet:
-                secondSet.add(n)
+                return n
                 
-        return list(secondSet).pop()
+        # return list(secondSet).pop()
         
         
