@@ -14,8 +14,8 @@ class Solution:
                 if d + nums[i] == target:
                     return True
                 
-                if d + nums[i] < target:
-                    newDP.add(d + nums[i])
+                # if d + nums[i] < target:
+                newDP.add(d + nums[i])
                 newDP.add(d)
             dp = newDP
                 
