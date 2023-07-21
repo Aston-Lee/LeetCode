@@ -8,6 +8,7 @@ class Solution:
             maxJump = 0
             for i in range(l, r+1):
                 maxJump = max(maxJump, i + nums[i])
+                print(l, r, i, maxJump)
             l = r + 1
             r = maxJump
             res += 1
