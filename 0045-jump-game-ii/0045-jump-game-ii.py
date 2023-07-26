@@ -1,22 +1,17 @@
 class Solution:
     def jump(self, nums: List[int]) -> int:
         
-        l, r = 0, 0
-        res = 0
+        l, r = 0, 0 
+        maxJump = 0
         
-        while r < (len(nums)-1):
-            maxJump = 0
+        while maxJump < len(nums)-1:
             for i in range(l, r+1):
-                maxJump = max(maxJump, i + nums[i])
-                print(l, r, i, maxJump)
-            l = r + 1
+                maxJump = max(maxJump, i+nums[i])
             r = maxJump
-            res += 1
+            l += 1
         
-        return res
-        
-        
-       
-                    
+        return l
+            
+            
         
          
