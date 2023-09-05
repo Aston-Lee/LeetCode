@@ -10,20 +10,27 @@ class Node:
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
         
-        ## think clearly and smart
-        ## go thorough every node and copy a new node
-        hashmap = {None: None}
-        node = head
-        while(node):
-            hashmap[node] = Node(node.val)
-            node = node.next
-                
+        posDict = {None: None}
+        inithead = head
+        newhead = initnode = Node(0)
+        while head:
+            tmp = Node(head.val)
+            newhead.next = tmp
+            posDict[head] = tmp
+            head = head.next
+            newhead = newhead.next
+            
+        head = inithead
+        newhead = initnode.next
+        while head:
+            newhead.random = posDict[head.random]
+            head = head.next
+            newhead = newhead.next
+            
+        return initnode.next
+            
         
-        node = head
-        while(node):
-            hashmap[node].next = hashmap[node.next]
-            hashmap[node].random = hashmap[node.random]
-            node = node.next
         
-        return hashmap[head]
+            
+        
         
