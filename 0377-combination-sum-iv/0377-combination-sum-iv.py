@@ -3,17 +3,17 @@ class Solution:
         
         nums.sort()
         @functools.lru_cache(maxsize = None)
-        def combs(remain):
-            if remain == 0:
+        def remain(n):
+            if n == 0:
                 return 1
-
-            result = 0
+            ans = 0
             for num in nums:
-                if remain - num >= 0:
-                    result += combs(remain - num)                                                                                                                                                               
+                if n-num >= 0:
+                    ans += remain(n-num)
                 else:
                     break
-
-            return result
-
-        return combs(target)
+            return ans
+            
+        return remain(target)
+                
+            
