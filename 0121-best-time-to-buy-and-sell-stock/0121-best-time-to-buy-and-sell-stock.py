@@ -33,14 +33,24 @@ class Solution(object):
         #     r += 1 
         # return maxP
         
-        currmin, allmax = float('inf'), -float('inf')
-        
+        currmin, currmax = float('inf'), -float('inf')
+        maxprofit = 0
         for p in prices:
-            if p < currmin:
+            if p < currmin and currmin != float('inf'):
+                if currmax != -float('inf'):
+                    maxprofit = max(maxprofit, currmax - currmin)
                 currmin = p
-            allmax = max(allmax, p-currmin)
+                currmax = -float('inf')
+            else:
+                currmin = min(currmin, p)
+                currmax = max(currmax, p)
+        
+        maxprofit = max(maxprofit, currmax - currmin)
+        return maxprofit
             
-        return allmax
+            
+            
+            
             
         
         
