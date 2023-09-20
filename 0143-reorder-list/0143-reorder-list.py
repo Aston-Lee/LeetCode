@@ -13,7 +13,7 @@ class Solution:
             slow = slow.next
             fast = fast.next.next
             
-        ## reverse it
+        ## reverse it, super important to know how to reverse
         prev, curr = None, slow
         while curr:
             tmp = curr.next
