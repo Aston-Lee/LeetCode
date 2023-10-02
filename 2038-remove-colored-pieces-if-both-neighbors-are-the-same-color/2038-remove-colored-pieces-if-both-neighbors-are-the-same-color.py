@@ -11,4 +11,4 @@ class Solution:
                 else:
                     bob += 1
         
-        return alice - bob >= 1 
+        return alice > bob
