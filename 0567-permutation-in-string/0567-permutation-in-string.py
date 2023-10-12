@@ -1,25 +1,25 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
         
-        def checking(short, long):
+        ## Brute Force Solution 
+        s1freq = Counter(s1)
+        s2freq = Counter(s2)
+        s1set = set(s1)
+        
+        for key, val in s1freq.items():
+            if s2freq[key] < val:
+                return False
             
-            targetDict = collections.Counter(short)
-            currDict = defaultdict(int)
-            
-            l = 0
-            for r in range(len(long)):
-                currDict[long[r]] += 1
-                if targetDict == currDict:
+        for i, c in enumerate(s2):
+            if c in s1set:
+                tmpfreq = defaultdict(int)
+                for j in range(len(s1)):
+                    if i+j >= len(s2):
+                        return False
+                    tmpfreq[s2[i+j]] += 1
+                    if tmpfreq[s2[i+j]] > s1freq[s2[i+j]]:
+                        break
+                if tmpfreq == s1freq:
                     return True
                 
-                while currDict[long[r]] > targetDict[long[r]]:
-                    currDict[long[l]] -= 1
-                    if currDict[long[l]] == 0:
-                        del currDict[long[l]]
-                    l += 1
-                    if l>r:
-                        break
-            return targetDict == currDict
-                
-        return checking(s1, s2) if len(s1) <= len(s2) else False
-        
+        return False
