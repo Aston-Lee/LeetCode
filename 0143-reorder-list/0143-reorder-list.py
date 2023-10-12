@@ -9,35 +9,30 @@ class Solution:
         Do not return anything, modify head in-place instead.
         """
         ## find middle
-        slow = head
-        fast = head.next
+        slow, fast = head, head.next
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-            
-        ## reverse second half  None->LastNode or LastNode->Node
+        
+        ## reverse second half 
+        prev = None
         curr = slow.next
-        prev = slow.next = None
-        while curr: ##can we further implement an improvment
+        slow.next = None
+        while curr:
             tmp = curr.next
             curr.next = prev
             prev = curr
             curr = tmp
-            
-            
-        # merge two halfs
-        first, second = head, prev
-        while second:
-            tmp1, tmp2 = first.next, second.next
-            first.next = second
-            second.next = tmp1
-            first, second = tmp1, tmp2
-            
     
-
+        ## linked 2 list up
+        list1, list2 = head, prev
+        while list1 and list2:
+            tmp1, tmp2 = list1.next, list2.next
+            list1.next = list2
+            list2.next = tmp1
+            list1 = tmp1
+            list2 = tmp2
+        if list2:
+            list1.next = list2
+        return head
             
-        
-        
-
-            
-        
