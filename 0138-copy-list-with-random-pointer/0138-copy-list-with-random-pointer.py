@@ -24,6 +24,7 @@ class Solution:
         newhead = initnode.next
         while head:
             newhead.random = posDict[head.random]
+            newhead.next = posDict[head.next]
             head = head.next
             newhead = newhead.next
             
