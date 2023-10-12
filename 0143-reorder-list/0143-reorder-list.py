@@ -8,27 +8,35 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        slow = fast = head
+        ## find middle
+        slow = head
+        fast = head.next
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
             
-        ## reverse it, super important to know how to reverse
-        prev, curr = None, slow
-        while curr:
+        ## reverse second half  None->LastNode or LastNode->Node
+        curr = slow.next
+        prev = slow.next = None
+        while curr: ##can we further implement an improvment
             tmp = curr.next
             curr.next = prev
             prev = curr
             curr = tmp
             
+            
+        # merge two halfs
         first, second = head, prev
-        while second.next:
-            tmp = first.next
+        while second:
+            tmp1, tmp2 = first.next, second.next
             first.next = second
-            tmp2 = second.next
-            second.next = tmp
-            first = tmp
-            second = tmp2
+            second.next = tmp1
+            first, second = tmp1, tmp2
+            
+    
+
+            
+        
         
 
             
