@@ -10,8 +10,7 @@ class Solution:
         
         def dfs(node):
             
-            if not node:
-                return
+            if node == None: return
             
             node.left, node.right = node.right, node.left
             dfs(node.left)
