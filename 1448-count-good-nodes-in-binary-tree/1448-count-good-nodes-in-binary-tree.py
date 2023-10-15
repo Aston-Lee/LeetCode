@@ -5,32 +5,18 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    
-    counter = 0
-    
     def goodNodes(self, root: TreeNode) -> int:
         
-        def traverse(node, maxValue):
-            
-            if node == None:
-                return
-            
-            if maxValue < node.val:
-                maxValue = node.val
-                self.counter += 1
-            elif maxValue == node.val:
-                self.counter += 1
-            
-            traverse(node.left, maxValue)
-            traverse(node.right, maxValue)
-            
-            return 
-        
-        traverse(root, -float('inf'))
-        
-        return self.counter
+        self.ans = 0
+        def dfs(node, currmax):
+            if not node:
+                return 
+            if node.val >= currmax:
+                self.ans += 1
+                currmax = max(currmax, node.val)
+            dfs(node.left, currmax)
+            dfs(node.right, currmax)
+            return
                 
-            
-            
-            
-            
+        dfs(root, -float('inf'))
+        return self.ans
