@@ -7,20 +7,18 @@
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         
-        
-        def traverse( node, leftbound, rightbound ) -> bool:
+        def dfs(node, leftbound, rightbound):
             
-            if node == None:
+            if not node:
                 return True
             
-            if leftbound < node.val and node.val < rightbound:
-                
-                return traverse(node.left, leftbound, node.val) \
-                    and traverse(node.right, node.val, rightbound)
-        
-            else:
+            if not (leftbound < node.val < rightbound):
                 return False
             
+            return dfs(node.left, leftbound, node.val) and dfs(node.right, node.val, rightbound)
             
+        return dfs(root, -float("inf"), float("inf"))
         
-        return traverse( root, -float('inf'), float('inf') )
+                
+            
+            
