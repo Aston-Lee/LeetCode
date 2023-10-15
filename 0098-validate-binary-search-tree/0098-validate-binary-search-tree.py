@@ -15,7 +15,8 @@ class Solution:
             
             if leftbound < node.val and node.val < rightbound:
                 
-                return traverse(node.left, leftbound, node.val) and traverse(node.right, node.val, rightbound)
+                return traverse(node.left, leftbound, node.val) \
+                    and traverse(node.right, node.val, rightbound)
         
             else:
                 return False
