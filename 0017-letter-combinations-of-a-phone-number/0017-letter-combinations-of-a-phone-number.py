@@ -1,18 +1,7 @@
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         
-#         map 
-        
-#         BT(tmpRes, remaindigits)
-        
-#         BT("", 23)
-#             BT(a, 3)
-#                 BT(ad, "")
-#                 BT(ae)
-#                 BT(af)
-#             BT(b, 3)
-#                 BT(bd)
-#             BT(c, 3)
+
         
         charmap = {
             "2" : "abc",
