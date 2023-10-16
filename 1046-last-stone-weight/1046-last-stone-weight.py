@@ -13,6 +13,5 @@ class Solution:
             n2 = heapq.heappop(stones)
             if n1!=n2:
                 heapq.heappush(stones, n1-n2)
-                # heapq.heapify(stones)
                 
         return -stones[0] if stones else 0
