@@ -21,12 +21,12 @@ class Solution:
                 backtrack(comb, remain-candidate, i, counter, results)
                 comb.pop()
                 counter[i] = (candidate, freq)
+                 
                     
         results = []
         counter = collections.Counter(candidates)
         counter = [ (c, counter[c]) for c in counter]
-        
-        
+        print( counter )
         
         backtrack( comb = [], remain = target, curr = 0, counter = counter, results = results )
         
