@@ -1,7 +1,9 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         ## use copy.deepcopy for deepcopy
-        ## in order to fit the time complexity, 
+        ## in order to fit the time complexity, check the less freq char in words and invert if you need to 
+        ## if boardDict[word[0]] > boardDict[word[-1]]:
+        ##    word = word[::-1]
         
         neighbor = ((0,1), (1,0), (0,-1), (-1,0))
         
