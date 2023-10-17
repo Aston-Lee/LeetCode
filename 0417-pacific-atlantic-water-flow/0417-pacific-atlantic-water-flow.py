@@ -23,8 +23,6 @@ class Solution:
                     new_row, new_col = row+x, col+y
                     if not (0 <= new_row < m) or not (0 <= new_col < n):
                         continue
-                    # if new_row < 0 or new_col<0 or new_row >= m or new_col >= n:
-                    #     continue
                     if (new_row, new_col) in reachable:
                         continue
                     
