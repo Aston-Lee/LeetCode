@@ -1,42 +1,37 @@
 class Solution:
-    def pacificAtlantic(self, matrix: List[List[int]]) -> List[List[int]]:
-        m = len(matrix)
-        n = len(matrix[0])
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
         
-        pacific_queue = deque()
-        atlantic_queue = deque()
-        for i in range(m):
-            pacific_queue.append((i, 0))
-            atlantic_queue.append((i, n-1))
+        DIR = [(0,1), (0,-1), (1,0), (-1,0)]
         
-        for j in range(n):
-            pacific_queue.append((0, j))
-            atlantic_queue.append((m-1, j))
-            
-            
-        def bfs( queue ):
+        def bfs(queue):
             reachable = set()
-            while queue: 
-                row, col = queue.popleft()
-                reachable.add((row, col))
-                for (x,y) in [(1,0), (-1,0), (0,1), (0,-1)]:
-                    new_row, new_col = row+x, col+y
-                    if not (0 <= new_row < m) or not (0 <= new_col < n):
+            while queue:
+                i, j = queue.pop()
+                reachable.add((i,j))
+                for x, y in DIR:
+                    col, row = i+x, j+y
+                    if not (0 <= col < m) or not (0 <= row < n):
                         continue
-                    if (new_row, new_col) in reachable:
+                    if (col,row) in reachable:
                         continue
+                    if heights[col][row] < heights[i][j]:
+                        continue
+                    queue.append((col, row))
                     
-                    ## current reachable, 
-                    ## if land inside is lower, no need to add it io the queue
-                    if matrix[new_row][new_col] < matrix[row][col]:
-                        continue
-                    queue.append((new_row, new_col))
-
             return reachable
+        
+        m, n = len(heights), len(heights[0])
+        
+        pacific, atlantic = deque(), deque()
+        for i in range(m):
+            pacific.append((i,0))
+            atlantic.append((i,n-1))
             
-        
-        pacific_reachable = bfs(pacific_queue)
-        atlantic_reachable = bfs(atlantic_queue)
-        
-        # return list(pacific_reachable.intersection(atlantic_reachable))
-        return list(pacific_reachable & atlantic_reachable)
+        for i in range(n):
+            pacific.append((0,i))
+            atlantic.append((m-1,i))
+            
+        pacificReachable  = bfs(pacific)
+        atlanticReachable = bfs(atlantic)
+            
+        return list(pacificReachable & atlanticReachable)
