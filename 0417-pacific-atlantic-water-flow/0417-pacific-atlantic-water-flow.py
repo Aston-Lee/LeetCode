@@ -21,8 +21,10 @@ class Solution:
                 reachable.add((row, col))
                 for (x,y) in [(1,0), (-1,0), (0,1), (0,-1)]:
                     new_row, new_col = row+x, col+y
-                    if new_row < 0 or new_col<0 or new_row >= m or new_col >= n:
+                    if not (0 <= new_row < m) or not (0 <= new_col < n):
                         continue
+                    # if new_row < 0 or new_col<0 or new_row >= m or new_col >= n:
+                    #     continue
                     if (new_row, new_col) in reachable:
                         continue
                     
