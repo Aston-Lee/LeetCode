@@ -2,7 +2,9 @@ class Solution:
     def maximumElementAfterDecrementingAndRearranging(self, arr: List[int]) -> int:
         
         
-        minheap = sorted(arr)
+        # minheap = sorted(arr)
+        arr.sort()
+        minheap = arr
         arr[0] = 1
         heapq.heapify(minheap)
         
