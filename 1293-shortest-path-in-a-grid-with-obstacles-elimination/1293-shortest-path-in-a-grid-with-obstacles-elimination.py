@@ -46,10 +46,8 @@ class Solution:
         NEI = [(1,0), (-1,0), (0,1), (0,-1)]
         m, n = len(grid), len(grid[0])
 
-        dq = deque()
-        dq.append((0,0,0,k))
-        visited = set()
-        visited.add((0,0,k))
+        dq = deque([(0,0,0,k)])
+        visited = set([(0,0,k)])
         while dq:
             for _ in range(len(dq)):
                 (step, i, j, remain) = dq.popleft()
