@@ -19,7 +19,7 @@ class Solution {
                     tower[r+1][g+1] += remain / 2;
                 }
             }
-            System.out.println("---");
+            // System.out.println("---");
         }
         
         return Math.min(1, tower[query_row][query_glass]);
