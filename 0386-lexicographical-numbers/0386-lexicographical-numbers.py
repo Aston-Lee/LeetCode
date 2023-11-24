@@ -1,9 +1,11 @@
 class Solution:
     def lexicalOrder(self, n: int) -> List[int]:
-                   
-            
-#         #1 always comes first, and we fill in all the ones that exist,
-#         #if it gets greater than n, then we finish
+                      
+        '''
+        1 always comes first, and we fill in all the ones that exist,
+        if it gets greater than n, then we finish
+        '''
+        
         ans = []
         
         def recursive(value):
