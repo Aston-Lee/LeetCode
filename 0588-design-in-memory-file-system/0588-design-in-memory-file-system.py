@@ -2,7 +2,6 @@ class Folder:
     def __init__(self):
         self.childfolder = defaultdict(set)
         self.files = defaultdict(str)
-        # self.files = ""
         
     
 
@@ -10,36 +9,14 @@ class FileSystem:
 
     def __init__(self):
         self.root = Folder()
+    
         
-
-    def ls(self, path: str) -> List[str]:
-        root = path[0]
-        currentfolder = self.root
-        tmpPath = ""
-        for char in path[1:]:
-            # print(char, tmpPath, list(currentfolder.childfolder))
-            if char == '/':
-                if tmpPath not in currentfolder.childfolder:
-                    return []
-                currentfolder = currentfolder.childfolder[tmpPath]
-                tmpPath = ""
-            else:
-                tmpPath += char
-        
-        last_part = tmpPath
-        if last_part in currentfolder.files:  # If the last part is a file
-            return [last_part]
-        elif last_part in currentfolder.childfolder:  # If the last part is a directory
-            target_folder = currentfolder.childfolder[last_part]
-            return sorted(list(target_folder.childfolder) + list(target_folder.files.keys()))
-        else:
-            return []  # Return empty list if the path is invalid
     def ls(self, path: str) -> List[str]:
         if path == "/":  # Handle the root directory
             # Combine and sort the names of child folders and files in the root
             return sorted(list(self.root.childfolder.keys()) + list(self.root.files.keys()))
 
-        parts = path.split('/')[1:]  # Split the path and ignore the leading '/'
+        parts = path[1:].split('/') # Split the path and ignore the leading '/'
         currentfolder = self.root
 
         for part in parts[:-1]:  # Traverse through the path to reach the target folder
