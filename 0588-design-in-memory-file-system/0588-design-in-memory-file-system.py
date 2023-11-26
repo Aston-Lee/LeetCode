@@ -19,9 +19,9 @@ class FileSystem:
         parts = path[1:].split('/') # Split the path and ignore the leading '/'
         currentfolder = self.root
 
-        for part in parts[:-1]:  # Traverse through the path to reach the target folder
+        for part in parts[:-1]:  
             if part not in currentfolder.childfolder:
-                return []  # Return empty list if a directory in the path does not exist
+                return []  
             currentfolder = currentfolder.childfolder[part]
 
         last_part = parts[-1]
