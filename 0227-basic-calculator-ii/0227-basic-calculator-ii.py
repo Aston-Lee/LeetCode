@@ -1,46 +1,40 @@
 class Solution:
     def calculate(self, s: str) -> int:
         
-        # " 3+5 / 2 @"
-
-        def evaluate(x, y, operator):
-            if operator == '+':
-                return x
-            if operator == '-':
-                return -x
-            if operator == '*':
-                return x*y
-            return int(x/y)
+        '''
+        " 3+5 / 2 "
+        num 2
+        prevsign /
+        stack = [3, 5]
+        '''
+        def _calculate(num, sign):
+            if sign == '+':
+                return num
+            elif sign == '-':
+                return -num
+            elif sign == '*':
+                n2 = stack.pop()
+                return n2 * num
+            elif sign == '/':
+                n2 = stack.pop()
+                return int(n2 / num)
+            else:
+                print('how')
         
+        s = s+'@'
+        num = 0
+        prevsign = '+'
         stack = []
-        previous = '+'
-        curr = 0
-        s += "@"
-        
-        for c in s:
-            if c == " ":
+        for char in s:
+            if char == " ":
                 continue
-            if c.isdigit():
-                curr = curr*10 + int(c)
-            else: 
-                if previous in "*/":
-                    stack.append(evaluate(stack.pop(), curr, previous))
-                else: ## +-
-                    stack.append(evaluate(curr, 0, previous))
-                    
-                curr = 0
-                previous = c
-                
+            elif char.isdigit():
+                    num = num*10 + int(char)
+            else:
+                stack.append(_calculate(num, prevsign))
+                prevsign = char
+                num = 0
         return sum(stack)
-                    
                 
-                        
-        
-        
-        
-                        
-                    
-                
-                    
                 
         
