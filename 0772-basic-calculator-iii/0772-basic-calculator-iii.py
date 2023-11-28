@@ -1,45 +1,58 @@
 class Solution:
     def calculate(self, s: str) -> int:
+        '''
+        "2*(5+5*2)/3+(6/2+8)@"
+        prevsign +
+        num = 11
+        stack = [10,]
+        '''
         
-        def evaluate(x, y, operand):
-            if operand == '+':
-                return x
-            if operand == '-':
-                return -x
-            if operand == '*':
-                return x*y
-            return int(x/y)
+        def _calculate(num, sign):
+            if sign == '+':
+                return num
+            elif sign == '-':
+                return -num
+            elif sign == '*':
+                n = stack.pop()
+                return int(n*num)
+            elif sign == '/':
+                n = stack.pop()
+                return int(n/num)
+            else:
+                print("how?")
             
+            
+        num = 0
+        prevsign = '+'
         stack = []
-        previous = '+'
-        curr = 0
         s += '@'
         
-        for c in s:
-            # print(c, stack)
-            if c == " ":
-                continue
-            if c.isdigit():
-                curr = curr * 10 + int(c)
-            elif c == '(': # elif in here crucial?
-                stack.append(previous)
-                previous = '+'
-            else:
-                if previous in '*/':
-                    stack.append(evaluate(stack.pop(), curr, previous))
-                else:
-                    stack.append(evaluate(curr, 0, previous))
+        for char in s:
+            
+            if char.isdigit():
+                num = num*10 + int(char)
                 
-                curr = 0
-                previous = c
-                if c == ')':
-                    while type(stack[-1]) is int:
-                        curr += stack.pop()
-                    previous = stack.pop()
-                    
-                    
+            elif char in "+-*/":
+                stack.append(_calculate(num, prevsign))
+                num = 0
+                prevsign = char
+                
+            elif char == '(':
+                stack.append(prevsign)
+                stack.append('(')
+                num = 0
+                prevsign = '+'
+                
+            elif char == ')':
+                stack.append(_calculate(num, prevsign))
+                num = 0
+                # prevsign = '+'
+                while stack[-1] != '(':
+                    num += stack.pop()
+                stack.pop()
+                prevsign = stack.pop()
+                
+            else: #'@'
+                stack.append(_calculate(num, prevsign))
+                
         return sum(stack)
-                    
-                    
-                
-                
