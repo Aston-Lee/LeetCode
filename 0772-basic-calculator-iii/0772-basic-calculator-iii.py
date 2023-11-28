@@ -1,58 +1,23 @@
 class Solution:
-    def calculate(self, s: str) -> int:
-        '''
-        "2*(5+5*2)/3+(6/2+8)@"
-        prevsign +
-        num = 11
-        stack = [10,]
-        '''
-        
-        def _calculate(num, sign):
-            if sign == '+':
-                return num
-            elif sign == '-':
-                return -num
-            elif sign == '*':
-                n = stack.pop()
-                return int(n*num)
-            elif sign == '/':
-                n = stack.pop()
-                return int(n/num)
-            else:
-                print("how?")
-            
-            
-        num = 0
-        prevsign = '+'
-        stack = []
-        s += '@'
-        
-        for char in s:
-            
-            if char.isdigit():
-                num = num*10 + int(char)
-                
-            elif char in "+-*/":
-                stack.append(_calculate(num, prevsign))
-                num = 0
-                prevsign = char
-                
-            elif char == '(':
-                stack.append(prevsign)
-                stack.append('(')
-                num = 0
-                prevsign = '+'
-                
-            elif char == ')':
-                stack.append(_calculate(num, prevsign))
-                num = 0
-                # prevsign = '+'
-                while stack[-1] != '(':
-                    num += stack.pop()
-                stack.pop()
-                prevsign = stack.pop()
-                
-            else: #'@'
-                stack.append(_calculate(num, prevsign))
-                
+    def calculate(self, s):
+        def update(op, num):
+            if op == '+': stack.append(num)
+            elif op == '-': stack.append(-num)
+            elif op == '*': stack.append(stack.pop() * num)
+            elif op == '/': stack.append(int(stack.pop() / num))  # truncate towards zero
+
+        it, num, stack, sign = iter(s), 0, [], "+"
+        for c in it:
+            if c.isdigit():
+                num = num * 10 + int(c)
+            elif c in "+-*/":
+                update(sign, num)
+                num, sign = 0, c
+            elif c == '(':
+                num = self.calculate(it)  # Recurse for parentheses
+            elif c == ')':
+                update(sign, num)
+                return sum(stack)  # return the result of the expression within the parentheses
+            # Skip whitespaces
+        update(sign, num)
         return sum(stack)
