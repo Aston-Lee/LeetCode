@@ -10,9 +10,9 @@ class Solution:
             while l < r:
                 if nums[t] + nums[l] + nums[r] == 0:
                     res.append([nums[t],nums[l],nums[r]])
-                    while l+1 != len(nums) and nums[l] == nums[l+1]:
+                    while l < r and l+1 != len(nums) and nums[l] == nums[l+1]:
                         l += 1
-                    while r-1 != 0 and nums[r] == nums[r-1]:
+                    while l < r and r-1 != 0 and nums[r] == nums[r-1]:
                         r -= 1
                     l += 1
                     r -= 1
