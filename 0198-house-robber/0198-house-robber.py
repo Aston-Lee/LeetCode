@@ -10,5 +10,6 @@ class Solution:
                 dp[i] = max(dp[1] + nums[2], dp[2])
             else:
                 dp[i] = max(dp[i-2], dp[i-3]) + nums[i-1]
+            print(dp)
         
         return max(dp[-1], dp[-2])
