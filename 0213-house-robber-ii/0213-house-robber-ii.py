@@ -28,7 +28,6 @@ class Solution:
                     dp[2] = dp[i-2] + ls[i]
                 else:
                     dp[i] = max(dp[i-2], dp[i-3]) + ls[i]
-            print(dp)
             return max(dp)
                     
         return max(robber(ls1), robber(ls2))
