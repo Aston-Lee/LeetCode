@@ -1,34 +1,61 @@
 class Solution:
     def calculate(self, s: str) -> int:
-        def helper(stack, i):
-            num = 0
-            sign = '+'
+        # Function to apply the operation based on the last sign
+        def apply_operation(left, right, op):
+            if op == '+':
+                return left + right
+            elif op == '-':
+                return left - right
+            elif op == '*':
+                return left * right
+            elif op == '/':
+                return int(left / right)  # Integer division that truncates towards zero
 
-            while i < len(s):
-                if s[i].isdigit():
-                    num = num * 10 + int(s[i])
-                elif s[i] in '+-*/':
-                    update_stack(stack, num, sign)
-                    num = 0
-                    sign = s[i]
-                elif s[i] == '(':
-                    num, i = helper([], i + 1)
-                elif s[i] == ')':
-                    update_stack(stack, num, sign)
-                    return sum(stack), i
-                i += 1
+        # Stack to handle parentheses and operators
+        stack = []
+        current_num = 0
+        last_operation = '+'
 
-            update_stack(stack, num, sign)
-            return sum(stack), i
+        for char in s + '+':
+            if char.isdigit():
+                # Construct the current number
+                current_num = current_num * 10 + int(char)
+            elif char in '+-*/':
+                # Apply the last operation
+                if stack and stack[-1] in '*/':
+                    # Apply the last high precedence operation
+                    last_high_precedence_operation = stack.pop()
+                    last_num = stack.pop()
+                    current_num = apply_operation(last_num, current_num, last_high_precedence_operation)
 
-        def update_stack(stack, num, sign):
-            if sign == '+':
-                stack.append(num)
-            elif sign == '-':
-                stack.append(-num)
-            elif sign == '*':
-                stack[-1] = stack[-1] * num
-            elif sign == '/':
-                stack[-1] = int(stack[-1] / num)
+                if char in '+-' or char == '+':
+                    # Apply the last low precedence operation and reset current_num
+                    while stack and stack[-1] in '+-':
+                        last_low_precedence_operation = stack.pop()
+                        last_num = stack.pop()
+                        current_num = apply_operation(last_num, current_num, last_low_precedence_operation)
 
-        return helper([], 0)[0]
+                # Update the operation and push to stack
+                last_operation = char
+                stack.append(current_num)
+                stack.append(last_operation)
+                current_num = 0
+
+            elif char == '(':
+                # Push the last operation and reset for new context
+                stack.append('(')
+            elif char == ')':
+                # Resolve the current context
+                while stack and stack[-1] != '(':
+                    last_operation = stack.pop()
+                    last_num = stack.pop()
+                    current_num = apply_operation(last_num, current_num, last_operation)
+                stack.pop()  # Pop the '('
+
+        # Final operation, if any
+        while stack:
+            last_operation = stack.pop()
+            last_num = stack.pop()
+            current_num = apply_operation(last_num, current_num, last_operation)
+
+        return current_num
