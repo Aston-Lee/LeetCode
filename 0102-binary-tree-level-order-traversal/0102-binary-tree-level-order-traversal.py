@@ -7,25 +7,33 @@
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         
-        if root == None:
-            return []
+        res = []
+        dq = deque()
+       
         
-        # mydict = collections.defaultdict(list)
-        lst = []
+        if root:
+            dq.append(root)
         
-        def traverse(node, depth):
-            if node == None:
-                return
+        while dq:
+            n = len(dq)
+            print(n)
+            tmp = deque()
+            tmpres = []
+            for i in range(n):
+                node = dq.popleft()
+                if node:
+                    tmpres.append(node.val)
+                    if node.left:
+                        tmp.append(node.left)
+                    if node.right:
+                        tmp.append(node.right)
+            res.append(tmpres)
+            dq = tmp
+            tmp = []
+            tmpres = []
             
-            # mydict[depth].append(node.val)
-            if depth+1 > len(lst):
-                lst.append([])
-            lst[depth].append(node.val)
+        return res
             
-            traverse(node.left, depth+1)
-            traverse(node.right, depth+1)
-            return 
+                
+            
         
-        traverse( root , 0 )
-        return lst
-            
