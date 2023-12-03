@@ -1,51 +1,56 @@
 class Solution:
     def calculate(self, s: str) -> int:
-        def operate(a, b, op):
-            if op == '+': return a + b
-            if op == '-': return a - b
-            if op == '*': return a * b
-            if op == '/': return int(a / b)  # truncate towards zero
+        def operate(op: str, second: int, first: int) -> int:
+            if op == '+': return first + second
+            if op == '-': return first - second
+            if op == '*': return first * second
+            if op == '/': return int(first / second)  # Truncate toward zero
 
-        def precedence(op):
+        def precedence(op: str) -> int:
             if op in ('+', '-'): return 1
             if op in ('*', '/'): return 2
             return 0
 
-        def apply_operation(operators, values):
+        def apply_operation(ops, values):
             right = values.pop()
             left = values.pop()
-            op = operators.pop()
-            values.append(operate(left, right, op))
+            op = ops.pop()
+            values.append(operate(op, right, left))
 
-        # Stacks for operators and values
-        operators, values = [], []
+        # Stack for numbers and operators
+        numbers = []
+        operators = []
 
         i = 0
         while i < len(s):
             if s[i] == ' ':
                 i += 1
                 continue
+
             if s[i].isdigit():
-                val = 0
+                num = 0
                 while i < len(s) and s[i].isdigit():
-                    val = (val * 10) + int(s[i])
+                    num = num * 10 + int(s[i])
                     i += 1
-                values.append(val)
+                numbers.append(num)
                 continue
-            if s[i] == '(':
+
+            if s[i] in "+-*/":
+                while operators and operators[-1] != '(' and precedence(operators[-1]) >= precedence(s[i]):
+                    apply_operation(operators, numbers)
                 operators.append(s[i])
+
+            elif s[i] == '(':
+                operators.append(s[i])
+
             elif s[i] == ')':
-                while operators and operators[-1] != '(':
-                    apply_operation(operators, values)
-                operators.pop()  # pop the '('
-            else:  # operator
-                while operators and precedence(operators[-1]) >= precedence(s[i]):
-                    apply_operation(operators, values)
-                operators.append(s[i])
+                while operators[-1] != '(':
+                    apply_operation(operators, numbers)
+                operators.pop()  # pop '('
+
             i += 1
 
-        # Apply remaining operations
         while operators:
-            apply_operation(operators, values)
+            apply_operation(operators, numbers)
 
-        return values[0]
+        return numbers[-1]
