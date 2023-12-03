@@ -1,48 +1,44 @@
 class TrieNode:
-    def __init__(self):
-        self.children = {} ## initialize dict to store the child right below
-        self.is_end = False
-
-
+    def __init__(self, char):
+        self.isEnd = False
+        self.childs = {}
+        # self.char = ""
+        
+        
 class Trie:
 
     def __init__(self):
-        self.root = TrieNode()
+        self.root = TrieNode("")
 
-        
     def insert(self, word: str) -> None:
         node = self.root
         for char in word:
-            if char in node.children:
-                node = node.children[char]
-            else:
-                new_node = TrieNode()
-                node.children[char] = new_node
-                node = new_node
-        node.is_end = True ## normaly this is False, only set to True when loop throu all char
-        
+            if char not in node.childs:
+                node.childs[char] = TrieNode(char)
+            node = node.childs[char]
+        node.isEnd = True
 
     def search(self, word: str) -> bool:
         node = self.root
         for char in word:
-            if char in node.children:
-                node = node.children[char]
-            else:
+            if char not in node.childs:
                 return False
-        if node.is_end == False:
-            return False
-        else:
-            return True
+            else:
+                node = node.childs[char]
+        return node.isEnd
         
+
     def startsWith(self, prefix: str) -> bool:
         node = self.root
         for char in prefix:
-            if char in node.children:
-                node = node.children[char]
-            else:
+            if char not in node.childs:
                 return False
+            else:
+                node = node.childs[char]
         return True
         
+
+
 # Your Trie object will be instantiated and called as such:
 # obj = Trie()
 # obj.insert(word)
