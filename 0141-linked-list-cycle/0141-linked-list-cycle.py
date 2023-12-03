@@ -6,21 +6,32 @@
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
+        
+        '''
+        How big is the size of the input? ans:10**10
+        How big is the range of values? 0-10**4
+        What kind of values are there? Are there negative numbers? Floating points? Will there be empty inputs?
+        Are there duplicates within the input?
+        What are some extreme cases of the input?
+        '''
+        
+        if not head:
+            return False
+        
         slow = fast = head
-        while(slow and fast):
-            if slow.next and fast.next:
-                slow = slow.next
-                if fast.next:
-                    fast = fast.next.next
-                else:
-                    break
-                if not slow or not fast:
-                    break
-            else:
-                break
+        fast = fast.next
+        
+        while slow and fast:
             if slow == fast:
-                 return True
-            
-
+                return True
+            slow = slow.next
+            if not fast:
+                return True
+            if fast.next:
+                fast = fast.next.next
+            else:
+                return False
             
         return False
+        
+        
