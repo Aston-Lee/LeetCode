@@ -11,13 +11,15 @@ class Solution:
         :rtype: int
         """
         ## why the fuck list can be fine and integer will have Local variable referenced problem?
-        if root==None: return 0
-        output = [] 
+        # if root==None: return 0
+        # output = [] 
+        self.ans = 0
         def pre(level, node):
             if node == None: return
-            output.append(level)
+            self.ans = max(self.ans, level)
+            # output.append(level)
             pre(level+1, node.left)
             pre(level+1, node.right)
         
         pre(1,root)
-        return max(output)
+        return  self.ans
