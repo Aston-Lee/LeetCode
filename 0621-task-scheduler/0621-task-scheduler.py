@@ -4,23 +4,24 @@ from typing import List
 
 class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
-        # Convert the frequency dictionary to a max heap
-        freqs = [-freq for _, freq in collections.Counter(tasks).items()]
-        heapq.heapify(freqs)
-        
+        count = Counter(tasks)
+        maxHeap = [-cnt for cnt in count.values()]
+        heapq.heapify(maxHeap)
+
         time = 0
-        while freqs:
-            waitlist = []
-            for _ in range(n + 1):
-                if freqs:
-                    task_freq = heapq.heappop(freqs)
-                    if task_freq + 1 < 0:
-                        waitlist.append(task_freq + 1)
-                time += 1
-                if not freqs and not waitlist:
-                    break
+        q = deque()  # pairs of [-cnt, idleTime]
+        while maxHeap or q:
+#             print("maxHeap: ", maxHeap)
+#             print("q: ", q)
+            time += 1
+            # print("time: ", time)
 
-            for task in waitlist:
-                heapq.heappush(freqs, task)
-
+            if not maxHeap:
+                time = q[0][1]
+            else:
+                cnt = 1 + heapq.heappop(maxHeap)
+                if cnt:
+                    q.append([cnt, time + n])
+            if q and q[0][1] == time:
+                heapq.heappush(maxHeap, q.popleft()[0]) ##push back reentry as others
         return time
