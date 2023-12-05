@@ -5,6 +5,7 @@ class Solution:
         ## Time: O(N) Space: O(N)
         minheap = []
         
+        
         for point in points:
             length = point[0]**2 + point[1]**2
             minheap.append((length, (point)))
