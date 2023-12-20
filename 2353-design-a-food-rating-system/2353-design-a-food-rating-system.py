@@ -16,7 +16,7 @@ class FoodRatings:
             self.food_cuisine_map[foods[i]] = cuisines[i]
             self.cuisine_food_map[cuisines[i]].add((-ratings[i], foods[i]))
             
-        print(self.food_rating_map, self.food_cuisine_map, self.cuisine_food_map)
+        # print(self.food_rating_map, self.food_cuisine_map, self.cuisine_food_map)
         
 
     def changeRating(self, food: str, newRating: int) -> None:
