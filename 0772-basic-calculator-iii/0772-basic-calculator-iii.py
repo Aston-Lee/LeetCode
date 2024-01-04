@@ -8,18 +8,11 @@ class Solution:
         '''
         
         def _calculate(num, sign):
-            if sign == '+':
-                return num
-            elif sign == '-':
-                return -num
-            elif sign == '*':
-                n = stack.pop()
-                return int(n*num)
-            elif sign == '/':
-                n = stack.pop()
-                return int(n/num)
-            else:
-                print("how?")
+            if sign == '+':   return num
+            elif sign == '-': return -num
+            elif sign == '*': return int(stack.pop()*num)
+            elif sign == '/': return int(stack.pop()/num)
+            else: print("how?")
             
             
         num = 0
