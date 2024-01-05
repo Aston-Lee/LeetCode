@@ -8,11 +8,11 @@ class Solution:
                 if char not in d:
                     d[char] = [0] * len(vote)
                 d[char][i] += 1
-            print(d)
+            # print(d)
 
         voted_names = sorted(d.keys())
-        print("voted_names:", voted_names)
-        print(sorted(voted_names, key=lambda x: d[x], reverse=True))
+        # print("voted_names:", voted_names)
+        # print(sorted(voted_names, key=lambda x: d[x], reverse=True))
         return "".join(sorted(voted_names, key=lambda x: d[x], reverse=True))
         ## reverse = True
                 
