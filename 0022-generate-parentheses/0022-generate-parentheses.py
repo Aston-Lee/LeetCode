@@ -18,7 +18,6 @@ class Solution:
                 return
             for i, s in enumerate(shape):
                 if s == '(':
-                    tmp = shape
                     addPar(shape[:i+1]+'()'+shape[i+1:], tn-1)
                     
             addPar(shape+'()', tn-1)
