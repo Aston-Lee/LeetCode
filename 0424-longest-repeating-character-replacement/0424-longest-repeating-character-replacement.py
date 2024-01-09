@@ -19,7 +19,6 @@ class Solution:
         maxlength = 0
         freq = defaultdict(int)
         while r < len(s):
-            # print(l, r, s[r])
             freq[s[r]] += 1
             while r-l+1-max(freq.values()) > k:
                 freq[s[l]] -= 1
