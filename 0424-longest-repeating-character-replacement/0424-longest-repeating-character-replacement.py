@@ -30,7 +30,6 @@ class Solution:
             else:
                 freq[s[l]] -= 1
                 l += 1
-            # print(freq)
             
         return maxlen
         
