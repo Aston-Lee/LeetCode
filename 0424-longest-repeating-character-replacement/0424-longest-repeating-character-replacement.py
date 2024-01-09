@@ -23,7 +23,7 @@ class Solution:
             while r-l+1-max(freq.values()) > k:
                 freq[s[l]] -= 1
                 l += 1
-            length = r-l+1
-            maxlength = max( maxlength, length )
+            # length = 
+            maxlength = max( maxlength, r-l+1 )
             r += 1
         return maxlength 
