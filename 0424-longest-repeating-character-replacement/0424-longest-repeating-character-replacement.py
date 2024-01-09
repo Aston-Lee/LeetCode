@@ -1,35 +1,30 @@
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
-        # ## 2 pointer 
-        # l, r = 0, 0
-        # freqdict = {} 
-        # maxlen = 0
-        # addFlag = True 
-        # while r != len(s):
-        #     if addFlag == True:
-        #         freqdict[s[r]] = freqdict.get(s[r], 0) + 1
-        #     length = r - l + 1 
-        #     if length - max(freqdict.values()) <= k:
-        #         addFlag = True
-        #         maxlen = max(maxlen, length)
-        #         r += 1
-        #     else:
-        #         addFlag = False
-        #         freqdict[s[l]] -= 1
-        #         l += 1
-        # return maxlen
+        '''
+        s = "AABABBA", k = 1
+             l   r
         
-        l = 0 
+        A : 3
+        b : 2
+        length : 5
+        length-max(dict.items()[1]) <= k
+            while length-max(dict.items()[1]) > k:
+                l += 1
+                dict[s[l]] -= 1
+        maxlength : 4
+        
+        
+        '''
+        l, r = 0, 0
+        maxlength = 0
         freq = defaultdict(int)
-        maxlen = 0
-        for r in range(len(s)):
-            freq[s[r]] +=1
-            currentlen = r - l + 1
-            if currentlen - max(freq.values()) <= k :
-                maxlen = max(maxlen, currentlen)
-            else:
+        while r < len(s):
+            # print(l, r, s[r])
+            freq[s[r]] += 1
+            while r-l+1-max(freq.values()) > k:
                 freq[s[l]] -= 1
                 l += 1
-            
-        return maxlen
-        
+            length = r-l+1
+            maxlength = max( maxlength, length )
+            r += 1
+        return maxlength 
