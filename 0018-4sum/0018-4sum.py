@@ -5,13 +5,16 @@ class Solution:
         [-2,-1,0,0,1,2] 3 sum
         -2 -1,0,0,1,2
         '''
+        ## 
         def kSum(nums: List[int], target: int, k: int) -> List[List[int]]:
             res = []
             
             if not nums:
                 return res
-            average_value = target // k
-            if average_value < nums[0] or nums[-1] < average_value:
+            
+            ## Efficiency Optimization & Early Termination
+            avg_target_value = target // k 
+            if avg_target_value < nums[0] or nums[-1] < avg_target_value:
                 return res
             
             if k == 2:
