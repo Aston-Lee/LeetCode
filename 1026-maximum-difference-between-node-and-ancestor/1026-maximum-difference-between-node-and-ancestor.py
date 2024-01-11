@@ -7,24 +7,41 @@
 class Solution:
     def maxAncestorDiff(self, root: Optional[TreeNode]) -> int:
         '''Ancestor
-        brue force, pass down all the ancestor 
+        brute force, pass down all the ancestor 
+        optimal, record currMax, currMin
         '''
-        
-        ## brute force 
         self.maxDiff = 0
-        def dfs(node, anc):
+        def dfs(node, currMax, currMin):
             if not node:
+                self.maxDiff = max(self.maxDiff, currMax - currMin)
                 return 
             
-            for a in anc:
-                diff = abs(a-node.val)
-                self.maxDiff = max(self.maxDiff, diff)
-            
-            dfs(node.left, [node.val] + anc )
-            dfs(node.right, [node.val] + anc )
-            
+            currMax = max(currMax, node.val)
+            currMin = min(currMin, node.val)
+            dfs(node.left, currMax, currMin)
+            dfs(node.right, currMax, currMin)
             return 
         
-        dfs(root, [])
+        dfs(root, root.val, root.val)
         
         return self.maxDiff
+        
+        
+#         ## brute force, AC 
+#         self.maxDiff = 0
+#         def dfs(node, anc):
+#             if not node:
+#                 return 
+            
+#             for a in anc:
+#                 diff = abs(a-node.val)
+#                 self.maxDiff = max(self.maxDiff, diff)
+            
+#             dfs(node.left, [node.val] + anc )
+#             dfs(node.right, [node.val] + anc )
+            
+#             return 
+        
+#         dfs(root, [])
+        
+#         return self.maxDiff
