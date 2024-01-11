@@ -43,7 +43,7 @@ class Solution:
             if stone == target:
                 return True
             
-            for u in range(unit+1, unit-2, -1):
+            for u in range(unit-1, unit+2):
                 if u < 1:
                     continue
                 if stone + u in candidate and (stone + u, u) not in visited:
