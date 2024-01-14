@@ -7,17 +7,5 @@ class Solution:
         dict1 = collections.Counter(word1)
         dict2 = collections.Counter(word2)
     
-        # print((set(dict1.keys()), set(dict2.keys())))
-        # print((set(dict1.keys()) == set(dict2.keys())))
-        # print(sorted(list(dict1.values())), sorted(list(dict2.values())))
-        # print(sorted(list(dict1.values()))==sorted(list(dict2.values())))
-        
-        return ((set(dict1.keys()) == set(dict2.keys())) and (sorted(list(dict1.values())) == sorted(list(dict2.values()))))
-        
-
-        
-#         "abbzzca"
-#         "babzzcz"
-#         ------ 
-#         "abbzzcz"
-#         ""
+        # return ((set(dict1.keys()) == set(dict2.keys())) and (sorted(list(dict1.values())) == sorted(list(dict2.values()))))
+        return dict1.keys() == dict2.keys() and sorted(dict1.values()) == sorted(dict2.values())
