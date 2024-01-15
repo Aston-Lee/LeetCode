@@ -8,6 +8,8 @@ class Solution:
         while l <= r:
             mid = (l+r)//2
             if not isBadVersion(mid):
+                if isBadVersion(mid+1):
+                    return mid + 1
                 l = mid + 1
             else:
                 r = mid - 1
