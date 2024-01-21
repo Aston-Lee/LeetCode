@@ -1,26 +1,25 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
         
-        # [2,7,9,3,1]
-        # [2,7,11,10,12]
+#         0123
+#         dp3 = max(dp1, dp0) + nums[3]
         
-        n = len(nums)   
+#         01234
+#         dp4 = max(dp2, dp1) + nums[4]
+#         dp3 = max(dp1, dp0) + nums[3]
+        
+        n = len(nums)
         if n < 3:
-            return max(nums)
-        elif n == 3:
-            nums[2] += nums[0] 
-            return max(nums)
+            return max(nums[:n])
+    
+        dp = [0]*len(nums)
         
-        dp = [0]*n
-        
-        for i in range(n):
+        for i in range(len(nums)):
             if i == 0 or i == 1:
                 dp[i] = nums[i]
-                
             elif i == 2:
-                dp[i] = dp[0] + nums[2]
-            
+                dp[i] = dp[i-2] + nums[i]
             else:
-                dp[i] = max(dp[i-2], dp[i-3]) + nums[i]
+                dp[i] = max(dp[i-3], dp[i-2]) + nums[i]
                 
-        return max(dp)
+        return max(dp[-1], dp[-2])
