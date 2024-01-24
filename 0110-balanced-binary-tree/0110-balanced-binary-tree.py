@@ -11,15 +11,11 @@ class Solution:
         
         def dfs(node):
             
-#             if not self.ans:
-#                 return None
-            
             if not node:
                 return 0
             
             left = dfs(node.left)
             right = dfs(node.right)
-            # print(node.val, left, right)
             
             if abs(left - right) > 1:
                 self.ans = False
