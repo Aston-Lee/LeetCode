@@ -6,19 +6,26 @@
 #         self.right = right
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        ## unbalanced: for any leftdeptht and rightdepth have difference more than 1
         
-        def height(node):
+        self.ans = True
+        
+        def dfs(node):
+            
+#             if not self.ans:
+#                 return None
+            
             if not node:
                 return 0
-            return 1 + max(height(node.left), height(node.right))
-        
-        def helper(node):
-            if (node == None):
-                return True
-            if (abs(height(node.left) - height(node.right)) > 1):
-                return False
-            else:
-                return helper(node.left) and helper(node.right)
             
-        return helper(root)
+            left = dfs(node.left)
+            right = dfs(node.right)
+            # print(node.val, left, right)
+            
+            if abs(left - right) > 1:
+                self.ans = False
+                
+            return max(left, right) + 1
+        
+        dfs(root)
+        
+        return self.ans
