@@ -13,8 +13,8 @@ class Solution:
             if not node.left and not node.right:
                 if sum(freq.values()) <= 1:
                     self.ans += 1
-                freq[node.val] = freq.get(node.val, 0) ^ 1
-                return 
+                # freq[node.val] = freq.get(node.val, 0) ^ 1
+                # return 
 
             # Traverse left and right subtrees
             dfs(node.left, freq)
