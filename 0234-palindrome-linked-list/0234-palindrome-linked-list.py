@@ -41,6 +41,3 @@ class Solution:
             slow = slow.next
         
         return True
-
-
-
