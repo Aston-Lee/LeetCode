@@ -13,8 +13,7 @@ class Solution:
                 index = stack.pop()
                 ans[index] = i-index
             stack.append(i)
-        # print(stack)
-        
+
         return ans 
         
         
