@@ -7,23 +7,23 @@ class MinStack:
 
     def push(self, val: int) -> None:
         self.stack.append(val)
-        # self.smallest = min(self.smallest, val)
-        # self.minrecord.append(self.smallest)
+        self.smallest = min(self.smallest, val)
+        self.minrecord.append(self.smallest)
+        # print(val, self.smallest, self.minrecord)
 
     def pop(self) -> None:
-        # self.minrecord.pop()
-        # if self.minrecord:
-        #     self.smallest = self.minrecord[-1]
-        # else:
-        #     self.smallest = 
+        self.minrecord.pop()
+        if self.minrecord:
+            self.smallest = self.minrecord[-1]
+        else:
+            self.smallest = float('inf')  # Reset smallest when stack is empty
         return self.stack.pop()
-
+    
     def top(self) -> int:
         return self.stack[-1]
 
     def getMin(self) -> int:
-        # return self.smallest
-        return min(self.stack)
+        return self.smallest
         
 
 
