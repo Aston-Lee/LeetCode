@@ -1,35 +1,51 @@
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
         
-        ## build the adj list
-        emailMap = defaultdict(list)
-        for i, (_, *account) in enumerate(accounts):
-            for j in range(len(account)):
-                email = account[j]
-                emailMap[email].append(i)
-                
-        ## DFS function traverse account
-        visitedAccounts = [False] * len(accounts)
-        def dfs(i, emails):
-            if visitedAccounts[i]:
-                return
-            visitedAccounts[i] = True
-            for j in range(1, len(accounts[i])):
-                email = accounts[i][j]
-                emails.add(email)
-                for neighbor in emailMap[email]:
-                    dfs(neighbor, emails)
+        mailAppear = defaultdict(list)
         
-        ## Main
+        totalappear = set()
+        for i in range(len(accounts)):
+            for mail in accounts[i][1:]:
+                mailAppear[mail].append(i)
+
+        visited = [False]*len(accounts)
+        def dfs(index, emailSet):
+            if visited[index]:
+                return 
+            visited[index] = True
+            
+            for mail in accounts[index][1:]:
+                emailSet.add(mail)
+                
+                for neighborIndex in mailAppear[mail]:
+                    dfs(neighborIndex, emailSet)
+            return 
+        
+            
+            
         res = []
         for i, (name, *account) in enumerate(accounts):
-            if visitedAccounts[i]:
+            if visited[i]:
                 continue
-            emails = set()
-            dfs(i, emails)
-            res.append([name] + sorted(emails))
-        return res
+            mailSet = set()
+            dfs(i, mailSet)
+            res.append([name] + sorted(list(mailSet)))
         
+        return res 
+            
         
+            
+            
         
+#         [["John","johnsmith@mail.com","john_newyork@mail.com"],["John","johnsmith@mail.com","john00@mail.com"],["Mary","mary@mail.com"],["John","johnnybravo@mail.com"]]
         
+        total [0,1,2,3]
+        merged [0,1]
+        "johnsmith@mail.com" [0,1]
+        "john_newyork@mail.com" [0,2]
+        "john00@mail.com" [1]
+        "mary@mail.com" [2]
+        "johnnybravo@mail.com" [3]
+
+            
+            
