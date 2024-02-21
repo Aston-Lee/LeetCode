@@ -1,45 +1,29 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         
-        ROWS, COLS = len(board), len(board[0])
-        path = set()
+        DIR = [(0,1), (0,-1), (1,0), (-1,0)]
+        self.ans = False
+        visited = set()
+        def dfs(i, j, wordIndex):
+            if wordIndex == len(word)-1:
+                self.ans = True
+                return
+            for _x, _y in DIR:
+                ni, nj = i+_x, j+_y
+                if 0<=ni<m and 0<=nj<n:
+                    if word[wordIndex+1] == board[ni][nj] and (ni, nj) not in visited :
+                        visited.add((i,j))
+                        dfs(ni,nj,wordIndex+1)
+                        visited.remove((i,j))
+            return         
+            
+        m, n = len(board), len(board[0])
         
-        NEI = [(0,1), (1,0), (0,-1), (-1,0)]
-        def dfs(r, c, i):
-            if (r,c) in path:
-                return False
-            if i == len(word)+1:
-                return True
-            
-            if r < 0 or r >= ROWS or c < 0 or c >= COLS:
-                return False
-            elif board[r][c] != word[i-1]:
-                return False
-                
-            path.add((r,c))
-            for x, y in NEI:
-                if dfs(r+x,c+y,i+1):
-                    return True
-            path.remove((r,c))
-            
-            return False
-                
-            
-            
-        freq = collections.Counter(word)
-        if freq[word[0]] > freq[word[-1]]:
-            word = word[::-1]
-             
-        for r in range(ROWS):
-            for c in range(COLS):
-                if board[r][c] == word[0]:
-                    if dfs(r,c,1):
-                        return True        
-        return False
-        
-        
-            
-            
-            
-            
-        
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == word[0]:
+                    visited.add((i,j))
+                    dfs(i, j, 0)
+                    visited = set()
+                    
+        return self.ans
