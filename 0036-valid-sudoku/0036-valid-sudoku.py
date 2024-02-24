@@ -1,4 +1,4 @@
-import numpy as np
+import numpy
 
 class Solution(object):
     def isValidSudoku(self, board):
@@ -21,7 +21,7 @@ class Solution(object):
                     
 
         ## check rol
-        board = np.transpose(board)
+        board = numpy.transpose(board)
         for i in range(m):
             appeared = set()
             for j in range(n):
@@ -31,9 +31,8 @@ class Solution(object):
                     return False
                 else:
                     appeared.add(board[i][j])
-        board = np.transpose(board)
-        
-        
+        board = numpy.transpose(board)
+
         
         ## check block
         def _checkblock(i ,j):
