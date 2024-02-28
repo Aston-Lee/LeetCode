@@ -1,41 +1,41 @@
 class Solution:
     def decodeString(self, s: str) -> str:
         '''
-        2[abc]3[cd]ef
         
-        tmp = 
-        stack = cbacba, dcdcdc, e, f
+        3[a]2[bc]
         
-        fecdcdcdcbacba
+        stack aaa cbcb
         
-        abcabcdcdcdcef
-        
-         
-        '''   
-        num = 0
+        '''
+        integer = 0 # record integer 
         stack = []
-        
-        for c in s:
-            if c.isdigit():
-                num = num*10 + int(c)
-
-            elif c == '[':
-                stack.append(num)
-                num = 0
-                stack.append('[')
-
-            elif c == ']':
-                tmp = ""
-                while stack[-1] != '[':
-                    tmp += stack.pop()
-                stack.pop()
-                stack.append(tmp*stack.pop())
-            else:
-                stack.append(c)
+        for char in s:
+            if char.isdigit():
+                integer*=10
+                integer+=int(char)
                 
-        ans = ""
+            elif char == '[':
+                stack.append(integer)
+                stack.append('[')
+                integer = 0
+
+            elif char == ']':
+                string = ""
+                while stack[-1] != '[':
+                    string += stack.pop()
+                stack.pop()
+                integer = stack.pop()
+                stack.append(string*integer)
+                string = ""
+                integer = 0
+                
+            else:
+                stack.append(char)
+
+        res = ""
         while stack:
-            ans += stack.pop()
-        
-        return ans[::-1]
-        ## in the end pop all from stack, concat them and reverse
+            res += stack.pop()
+            
+        return res[::-1]
+                
+                
