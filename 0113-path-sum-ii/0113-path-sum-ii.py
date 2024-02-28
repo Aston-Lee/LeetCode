@@ -10,21 +10,26 @@ class Solution:
         self.ans = []
         
         def dfs(node, ls, pathSum):
-
+            
             if not node:
-                return
-            # print(ls, pathSum, node.val)
-            # if pathSum > targetSum:
-            #     return
+                return 
+            
+            ls.append(node.val)
+            pathSum += node.val
+            
             if pathSum == targetSum and not node.left and not node.right:
-                self.ans.append(ls[:])
+                self.ans.append(ls[:]) 
             
             if node.left:
-                dfs(node.left, ls+[node.left.val], pathSum+node.left.val)
+                dfs(node.left, ls, pathSum)
             if node.right:
-                dfs(node.right, ls+[node.right.val], pathSum+node.right.val)
-            
-        if root:   
-            dfs(root, [root.val], root.val)
+                dfs(node.right, ls, pathSum)                
+                
+            ls.pop()
+            pathSum -= node.val
+         
+        
+        
+        dfs(root, [], 0)
         
         return self.ans
