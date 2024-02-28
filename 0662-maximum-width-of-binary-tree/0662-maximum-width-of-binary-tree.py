@@ -7,23 +7,35 @@
 class Solution:
     def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         
-        maxWidth = 0
+#         0
+#         2*0 + 2*0+1
+#         0 1
         
-        # bfs traverse 
-        q = deque()
-        q.append((root, 0))
-        while q:
+#         2*0 2*0+1   2*1 2*1+1   
+#         0 1 2 3
+        
+#         2*0 2*0+1 || 2*1 2*1+1 || 2*2 2*2+1 || 2*3 2*3+1
+        
+#         0 1          2.  3.       4.  5.       6.   7
+        
+        
+        
+        dq = deque([(root, 0)])
+        maxlength = 0
+        while dq:
+            # print(dq)
             minIndex, maxIndex = float('inf'), -float('inf')
-            for i in range(len(q)):
-                node, index = q.popleft()
-                if not node:
-                    continue
+            for _ in range(len(dq)):
+                node, index = dq.popleft()
                 minIndex = min(minIndex, index)
                 maxIndex = max(maxIndex, index)
-                q.append( (node.left, 2*index) )
-                q.append( (node.right , 2*index+1)) 
-            if  minIndex != float('inf') and maxIndex != -float('inf'):
-                maxWidth = max(maxWidth, (maxIndex - minIndex + 1))
-                
-        return maxWidth
+                if node.left:
+                    dq.append((node.left, 2*index))
+                if node.right:
+                    dq.append((node.right, 2*index+1))
             
+            maxlength = max(maxlength, maxIndex-minIndex+1)
+            
+        return maxlength
+        
+        
