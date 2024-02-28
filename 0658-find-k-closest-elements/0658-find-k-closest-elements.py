@@ -9,7 +9,7 @@ class Solution:
             else:
                 heapq.heappushpop(heap, [-abs(num-x), -num])
                 
-        print(heap)
+        # print(heap)
         
         res = []
         for _, num in heap:
