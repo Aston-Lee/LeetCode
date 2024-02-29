@@ -6,54 +6,23 @@
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         
-        ptr = node = ListNode(0)
-        num = 0
-        inc = 0
-        while l1 and l2:
-            num = (l1.val + l2.val + inc)
-            if num >= 10:
-                num %= 10
-                inc = 1
-            else:
-                inc = 0
-            node.next = ListNode(num)
-            l1 = l1.next
-            l2 = l2.next
+        head = node = ListNode(0)
+        addon = 0
+        while l1 or l2:
+            n1 = l1.val if l1 else 0
+            n2 = l2.val if l2 else 0
+            num = n1 + n2 + addon
+            addon = num//10
+            node.next = ListNode(num%10)
             node = node.next
-            
-        ## one not ended
-        if l1 and not l2:
-            while l1:
-                num = (l1.val + inc)
-                if num >= 10:
-                    num %= 10
-                    inc = 1
-                else:
-                    inc = 0
-                node.next = ListNode(num)
+            if l1:
                 l1 = l1.next
-                node = node.next
-            node.next = None
-            
-        elif not l1 and l2:
-            while l2:
-                num = (l2.val + inc)
-                if num >= 10:
-                    num %= 10
-                    inc = 1
-                else:
-                    inc = 0
-                node.next = ListNode(num)
+            if l2:
                 l2 = l2.next
-                node = node.next
-            node.next = None
+                
+        if addon:
+            node.next = ListNode(addon)
+
+        return head.next
             
-        if not l1 and not l2:
-            if inc == 1:
-                node.next = ListNode(1)
-                node = node.next
-            node.next = None
-        else:
-            print('how')
-        
-        return ptr.next
+            
