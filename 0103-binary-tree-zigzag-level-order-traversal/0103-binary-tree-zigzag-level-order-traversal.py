@@ -7,8 +7,9 @@
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         
-#         dq 9 20
-#         direction = -1
+        '''
+        bfs, add it as normal, add the result for each layer with changeble direction
+        '''
         
         direction = 1
         
@@ -24,10 +25,13 @@ class Solution:
                     continue
                 tmp.append(node.val)
                 
-                if node.left:
-                    dq.append(node.left)
-                if node.right:
-                    dq.append(node.right)
+                dq.append(node.left)
+                dq.append(node.right)
+                
+#                 if node.left:
+#                     dq.append(node.left)
+#                 if node.right:
+#                     dq.append(node.right)
                     
             if direction == 1:
                 direction = -1
