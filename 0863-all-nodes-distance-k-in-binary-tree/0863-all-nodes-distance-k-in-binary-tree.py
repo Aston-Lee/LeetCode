@@ -4,37 +4,57 @@ class TreeNode:
         self.val = x
         self.left = None
         self.right = None
-        self.par = None
+        self.parent = None
 
 class Solution:
     def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:
         
-        ## dfs find and make parent 
-        def dfs(node, par):
+        self.targetNode = None
+        def makeParent(node):
             if not node:
-                return            
-            node.par = par
-            dfs(node.left, node)
-            dfs(node.right, node)
-            return 
+                return
             
-        dfs(root, None)
+            if node.val == target.val:
+                self.targetNode = node
+            
+            if node.left:
+                node.left.parent = node
+                makeParent(node.left)
+            if node.right:
+                node.right.parent = node
+                makeParent(node.right)
         
+        self.root = TreeNode(root.val)
+        self.root.left = root.left
+        self.root.right = root.right
+        makeParent(self.root)
+        
+        ## bfs find
+        visited = set()
+        dq = deque([self.targetNode])
+        visited.add(self.targetNode)
+        
+        degree = 0
+        while dq and degree != k:
+            degree += 1
+            for _ in range(len(dq)):
+                node = dq.popleft()
+                if not node:
+                    continue
+                if node.left and node.left not in visited:
+                    dq.append(node.left)
+                    visited.add(node.left)
+                if node.right and node.right not in visited:
+                    dq.append(node.right)
+                    visited.add(node.right)
+                if node.parent and node.parent not in visited:
+                    dq.append(node.parent)
+                    visited.add(node.parent)
+
         res = []
-        def find(node, distance, seen):
-            if not node:
-                return 
-            if node in seen:
-                return
-            if distance == 0:
-                res.append(node.val)
-                return
-            seen.add(node)
-            find(node.par, distance-1, seen)
-            find(node.left, distance-1, seen)
-            find(node.right, distance-1, seen)
-            seen.remove(node)
-            return
-              
-        find(target, k, set())
-        return res
+        for node in dq:
+            res.append(node.val)
+        
+        return res 
+        
+        
