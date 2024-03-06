@@ -6,40 +6,28 @@
 class Solution:
     def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
         
-        if head == None:
-            return None
-        elif k == 0:
+        slow = head
+        n = 0
+        while slow:
+            n += 1
+            slow = slow.next
+           
+        
+        if n == 0 or n == 1:
+            return head
+        k %= n
+        if k == 0:
             return head
         
-        currlength = 0
-        slow = fast = head
-        
-        for i in range(k):
-            currlength += 1
+        slow = fast = head 
+        for _ in range(k%n):
             fast = fast.next
-            if not fast:
-                fast = head
-                if k >= currlength:
-                    k %= currlength
-                    if k == 0:
-                        return head
-                    else:
-                        currenlength = 0
-                        for i in range(k):
-                            currlength += 1
-                            fast = fast.next
-                            if not fast:
-                                if currlength == k:
-                                    return head
-                                fast = head
-                break
-                
+            
         while fast.next:
             slow = slow.next
             fast = fast.next
             
-        temp = head
-        head = slow.next
+        ptr = slow.next
         slow.next = None
-        fast.next = temp
-        return head
+        fast.next = head
+        return ptr
