@@ -4,29 +4,40 @@ class Solution:
         if endWord not in wordList:
             return 0
         
-        ## adjency list
-        nei = collections.defaultdict(list)
+        
+        adj = defaultdict(set)
         for word in wordList:
-            for j in range(len(word)):
-                pattern = word[:j] + '*' + word[j+1:]
-                nei[pattern].append(word)
-        
-        ## bfs
-        q = deque([beginWord])
-        res = 1
-        visit = set([beginWord])
-        while q:
-            for i in range(len(q)): ## why
-                word = q.popleft()
-                if word == endWord:
-                    return res
-                for j in range(len(word)):
-                    pattern = word[:j] + '*' + word[j+1:]
-                    for neiWord in nei[pattern]:
-                        if neiWord not in visit:
-                            visit.add(neiWord)
-                            q.append(neiWord)
-            res += 1
-        
-        return 0
+            for i in range(len(word)):
+                adj[word[:i]+'*'+word[i+1:]].add(word)
+                
+        for key, val in adj.items():
+            adj[key] = list(val)
             
+        
+        dq = deque([beginWord])
+        visited = set()
+        degree = 0
+        while dq:
+            # print(dq)
+            degree += 1
+            for _ in range(len(dq)):
+                word = dq.popleft()
+                if word == endWord:
+                    return degree
+                if word in visited:
+                    continue
+                for i in range(len(word)):
+                    adjWord = word[:i]+'*'+word[i+1:]
+                    # print("adjWord: ", adjWord)
+                    if adjWord in adj:
+                        ls = adj[adjWord]
+                        for lsword in ls:
+                            if lsword not in visited:
+                                dq.append(lsword)
+                    
+                visited.add(word)
+                adj[word] = []
+                
+        return 0
+                
+        
